@@ -71,10 +71,18 @@
 - **Why RHEL?**
 
   - 認證Since 1999.1
+
+    - `RHCSA8 - RedHat Certificated System Administrator` = RH124 + RH134
+
+    - `RHCE8 - RedHat Certificate Engineer`               = RH294
+
+      
+
   - UpstreamFirst
     - **原則：緊跟上游，不在自己產品中放任何沒有被Upstream接納的代碼，在上游社區的代碼基礎上做減法，篩選出隊企業用戶有價值，成熟問題的代碼來構建自己的發行版**
       - ==Upstream==   - 各種開源項目 - Linux Kernel/Apach/K8s
       - ==Downstream== - fork Upstream形成自己的一個分支進行維護
+    
   - Red Hat Linux
     - `Fedora` - ==Upstream==
       - 面嚮社區完全免費
@@ -110,4 +118,51 @@
 
 ## 2. Linux基礎/高級文件管理
 
+### 1. Install Rocky Linux
+
+
+
+### 2. 重點提煉
+
+- Linux File Management cmd mainly for config & script
+
+- Linux的一級目錄
+
+- Absolute/Relative path
+
+- Before cmd
+  - who am I? - `whoami`
+  - Where am I? - `pwd`
+  - What I'm gonna do?
+
+- Basic cmd
+
+  ```bash
+  # 不要可以背參數，要去理解
+  ls
+  cd
+  touch
+  mkdir
+  rm
+  cp
+  mv
+  cat
+  tac
+  head
+  tail
+  more
+  less
+  file
+  * tar 
+  * zip
+  grep
+  vi
+  vim
+  ```
+
+- Regex
+
+- 
+
 ## 3. Linux用戶/用戶組/密碼管理
+
