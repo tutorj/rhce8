@@ -168,16 +168,93 @@
 
 - `sed` - stream editor for filtering and transforming text
 
-  ```bash
+  - :) - non-interactive in script
+  - 默認不會真正執行，只有-i才會執行
   
+  ```bash
+  # delete Nth row
+  sed -i 'Nd' file
+  
+  # delete N~Mth row
+  sed -i 'N,Md' file
+  
+  # delete last row
+  sed -i "$d" file
+  
+  # delete rows contain "cat"   -> commonly used
+  sed -i '/cat/d' file
+  ```
+  
+  ```bash
+  # insert before Nth row
+  sed 'Ni <content>' file
+  
+  # append to Nth row
+  sed 'Na <content>' file
+  
+  # insert before row starting with "ccat"
+  sed '/^ccat/i <content>' file
+  
+  # append to row starting with "ccat"
+  sed '/^ccat/a <content>' file
+  ```
+  
+  ```bash
+  # similar to "1,$s///"" in vim
+  
+  # substitude -> commonly used, starting "s///"
+  sed 's/<old>/<new>' file
+  sed 's/<old>/<new>/g' file
+  
+  sed 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
+  ```
+  
+  ```bash
+  # print Nth row
+  sed -n 'Np' file
+  
+  # print Nth row to last row
+  sed -n 'N,$p' file
   ```
 
 ### 4. awk
 
 - `awk` - pattern scanning and processing language
 
-  ```bash
+  - break file content to matrix - row & col(*)
   
+  ```bash
+  # print 
+  awk '{print}' /etc/passwd
+  awk '{print $0}' /etc/passwd
+  ```
+  
+  ```bash
+  # print row = sed -n 'Xp' file
+  awk 'NR==X' /etc/passwd
+  awk 'NR==X,NR==Y' /etc/passwd
+  ```
+  
+  ```bash
+  # print col
+  awk -F ":" '{print $X,$Y}' /etc/passwd
+  awk -F ":" '{print "uid: "$X, "\tgid is: "$Y}' /etc/passwd
+  awk -F ":" 'NR==Z{print "Col#3 is: "$X, "\tCol#4 is: "$Y}' /etc/passwd
+  
+  # print last col
+  awk -F ":" '{print $NF}' /etc/passwd
+  # print 1st N col
+  awk -F ":" 'NF=5' /etc/passwd
+  
+  
+  # example
+  [tutorj@RHEL8-RHCE ~]$ ifconfig | grep -A1 enp0s3 | grep inet | awk '{print $2}'
+  10.0.3.4
+  ```
+  
+  ```bash	
+  # remove emtpy row
+  awk NF file
   ```
 
 ### 5. screen (epel repo)
@@ -252,9 +329,32 @@
 
 ### 2. freeipa
 
-### 3. login.defs
+### ~~3. login.defs~~
 
 ### 4. $PS1
+
+- Linux ENV loading
+
+  - `/etc/profile` -> `/etc/profile.d/*.sh` -> `~/.bash_profile` -> `~/.bashrc` -> `/etc/bashrc`
+
+```bash
+# env
+[tutorj@RHEL8-RHCE ~]$ echo $PS
+$PS1  $PS2  $PS4
+[tutorj@RHEL8-RHCE ~]$ echo $PS1
+[tutorj@RHEL8-RHCE ~]$ echo $PS1
+[\u@\h \W]\$
+[tutorj@RHEL8-RHCE ~]$ echo $PS2
+>
+[tutorj@RHEL8-RHCE ~]$ echo $PS3
+
+[tutorj@RHEL8-RHCE ~]$
+
+# export
+export PS1=
+
+# persist in .bashrc
+```
 
 ### 5. zabbix繼承Windows AD實現統一認證
 
